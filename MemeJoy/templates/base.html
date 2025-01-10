@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Unggah dan nikmati galeri gambar di platform kami!">
+    <meta name="keywords" content="gambar, unggah, galeri, like, komentar">
+    <title>{% block title %}MemeJoy App{% endblock %}</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo.jpeg') }}" type="image/jpeg">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='logo.jpeg') }}" alt="Logo" class="logo">
+            <h1>MemeJoy</h1>
+        </div>
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('gallery') }}">Gallery</a>
+        </nav>
+        <h2>Ayo upload meme sesukamu</h2>
+    </header>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for category, message in messages %}
+                    <li class="alert alert-{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2025 MemeJoy</p>
+    </footer>
+    </div>
+</body>
+</html>

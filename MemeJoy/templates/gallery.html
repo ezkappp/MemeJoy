@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Galeri Meme{% endblock %}
+
+{% block content %}
+<div class="image-gallery">
+    <h2>Galeri Meme</h2>
+    <div class="gallery-grid">
+    {% for image in images %}
+    <div class="image-card">
+        <a href="{{ url_for('image', image_id=image.id) }}">
+            <img src="{{ url_for('uploaded_file', filename=image.filename) }}" alt="{{ image.filename }}" class="gallery-image">
+        </a>
+        <div class="image-details">
+            <h3><a href="{{ url_for('like_image', image_id=image.id) }}">Like</a> ({{ image.likes }})</h3>
+            <p>Jumlah Komentar: {{ image.comments|length }}</p> <!-- Menampilkan jumlah komentar -->
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

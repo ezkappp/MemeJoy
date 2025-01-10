@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Galeri Meme{% endblock %}
+
+{% block content %}
+<h2>{{ image.filename }}</h2>
+<div class="image-gallery">
+    <div class="image-card">
+        <a href="{{ url_for('image', image_id=image.id) }}">
+            <img src="{{ url_for('uploaded_file', filename=image.filename) }}" alt="{{ image.filename }}" class="gallery-image">
+        </a>
+        <div class="image-details">
+            <h3><a href="{{ url_for('like_image', image_id=image.id) }}">Like</a> ({{ image.likes }})</h3>
+        </div>
+    </div>
+    
+    <h3>Komentar:</h3>
+    <ul>
+        {% for comment in comments_list %}
+            <li>{{ comment.text }}</li>
+        {% endfor %}
+    </ul>
+    
+    <form method="POST">
+        <textarea name="comment" placeholder="Tulis komentar..."></textarea>
+        <button type="submit">Kirim</button>
+    </form>
+</div>
+{% endblock %}
